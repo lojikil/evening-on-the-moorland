@@ -200,6 +200,20 @@ bascially:
 
 ---
 
+# one last 🌶thought
+
+- almost none of the cool vulns I've seen are "zero days"
+- the coolest vulns have had:
+  - minimal tooling
+  - abuse of exisiting functionality
+  - often impossible to truly fix
+- true across:
+  - Finance
+  - Government
+  - GitHub/Microsoft
+
+---
+
 # thank you!
 
 - Questions?
