@@ -1,0 +1,6 @@
+digraph G {
+    laptopA->sut[label="multi-factor secure, air gapped network"]
+    laptopA[shape=record, label="{Locked down Windows laptop| no installation rights | No scripting beyond shell}"]
+    sut[shape=box, label="system under test (SUT)"]
+    laptopB[shape=record, label="{Work laptop| no access to SUT | can install anything you want}"]
+}

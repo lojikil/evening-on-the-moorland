@@ -1,0 +1,11 @@
+rule press
+    command = cat $in > $out
+    description = simply concatenate the various files into the presentation
+
+rule image
+    command = dot -Tpng $in > $out
+    description = convert DOT files into PNGs
+
+build img/bridge.png: image img/bridge.dot
+build img/airgap.png: image img/airgap.dot
+build presentation.html: press header.html presentation.md footer.html

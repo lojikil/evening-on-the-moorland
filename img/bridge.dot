@@ -1,0 +1,8 @@
+digraph G {
+    laptopA->tools->sut[label="multi-factor secure, air gapped network"]
+    tools[shape=record, label="{ HTTP Post to HTML Form (CSRF) | SQL Injection scripts | XSS Scripts | Manual/Copy Paste helpers }"] 
+    laptopA[shape=record, label="{Locked down Windows laptop| browser state files/HAR files}"]
+    sut[shape=box, label="system under test (SUT)"]
+    laptopB[shape=record, label="{Work laptop| tools for processing state/HAR files}"]
+    laptopA->laptopB[style=dashed, label="sneaker net with encrypted harddrive"]
+}

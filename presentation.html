@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>‘Tis evening on the moorland free</title>
+    <script src="https://gnab.github.io/remark/downloads/remark-0.5.9.min.js" type="text/javascript"> </script>
+    <style type="text/css" media="screen">
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+        margin-top: 10px;
+      }
+      h1 { font-size: 3.5em; }
+      h2 { font-size: 3em; }
+      h3 { font-size: 1.6em; }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+
+      pre {
+        border-left: 0.4em solid #d7d7d7;
+        padding: 1em !important;
+      }
+      code {
+        background: transparent !important;
+      }
+      a {
+        color: #F92672;
+        text-decoration: none;
+      }
+      .task {
+        float: right;
+        font-size: 0.9em;
+        padding-top: 0.6em;
+      }
+      .task a {
+        color: #080;
+        text-decoration: none;
+      }
+      .right {
+        float: right;
+        margin-left: 1em;
+      }
+      .pushdown {
+        margin-top: 12em;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+# ‘Tis evening on the moorland free
+## conceptions of and corrections to TTPs for new pentesters
+
+_23OCT2023_
+
+---
+
+# Overview
+
+1. intro to me
+1. key takeaways
+1. definitions
+1. my career arc
+1. tools
+1. tactics
+1. techniques
+1. procedures
+1. Q&A
+
+---
+
+### `$ curl somehost.local/.well-known/webfinger?resource=acct:lojikil`
+```
+
+- Previously: DIROFFSEC (various places)
+- Currently: Staff Security Engineer @ Etsy
+- Currently: security consultant
+- Domains: Code Review, Modeling, Adversary Sim/Emu, Program Analysis
+- Interests: compilers, program analysis
+- socials: @lojikil@mastodon.social, lojikil.bluesky.social
+- code: github.com/lojikil, sr.ht/~lojikil/
+- WARNING: very hard of hearing
+- WARNING: Noo Yawk
+```
+
+---
+
+# take aways
+
+1. Tools are just that: tools
+  - they enable, but don't replace, thinking
+1. You can pentest with just about any setup
+  - live off the land
+1. Observe, Orient, Decide, Act: think before do
+1. Perfection comes later
+1. BLUF: mindset shift towards maturity
+
+**Legal Disclaimer: do not use any of the TTPs we talk about here
+against systems you don't own or don't have permission to test**
+
+---
+
+# definitions
+
+- TTP: variously {Tools, Tactics, Techniques} and Procedures
+  - basically a breakdown of the *how* a threat actor operates
+- OODA: observe, orient, decide, act
+- process loops: things like OODA, F3EAD (find, fix, finish, exploit, analyze, destroy/deny/degrade/disseminate)
+  - rough guides to how we think about our operations
+- CVE: common vulnerability enumeration
+- CWE: common weakness enumeration
+- advesary simluation: acting like a threat actor (simulation) or using their TTPs (emulation)
+- threat intelligence: taking raw data and turning it into potential threats against the org as actionable data (intelligence)
+- threat hunting: forming a hypothesis and testing out that hypothesis against logs & other data sources
+- threat research: manually developing new threats (aka pentesting/red teaming/...)
+
+---
+
+# my career arc
+
+1. fixing computers, academic IT support
+1. commercial IT support, light dev work
+1. dev work
+1. dev work mixed with network security
+1. application security full time
+1. low visibility pen testing
+1. adversary simulation
+1. threat {intelligence, hunting, research}
+
+---
+
+# my career arc: maturation
+
+each step: systematizing previous step
+
+1. fixing computers, academic IT support: consistent IT skill organization
+1. commercial IT support, light dev work: consistent scripting, IT skills
+1. dev work: organize scripts into applications
+1. dev work mixed with network security: fix issues with networks for applications
+1. application security full time: find fix issues with applications
+1. low visibility pen testing: conceive of what issues might exist based on what you can discover
+1. adversary simulation: apply what real world attackers do, develop your own
+1. threat {intelligence, hunting, research}: organize data to do what real world attackers _might_ do
+
+bascially:
+
+- breaking down the "things" I do
+- organizing those "things" into steps I can reproduce
+- analzying those reproductions into currents and themes
+- meta-analyzing the results into strategies for approaching new systems
+
+---
+
+# tools
+
+- first step in maturation
+- collect them all: VulnDB, 1337db, Security Forest, Kali...
+- this works great!
+  - we learn about vulnerabilities, have lots of things on hand
+- ... until we hit:
+
+![air gapped network](img/airgap.png)
+
+---
+
+# tools: bridging the gap
+
+- we know what we need:
+  - accelerate testing 
+  - coverage, tools we like
+- live off the land:
+  - locked down laptop has Browser, can connect to SUT...
+  - maybe has perl, PowerShell, whatever
+  - build little tools:
+  - `perl -ne 'chomp; @t = split(/&/); for (@t) { @g = split(/=/); print "<input type=text name=$g[0]> <br>\n"; }'`
+- build tools: https://github.com/lojikil/lovetz
+
+![bridge the gap](img/bridge.png)
+
+---
+
+# tactics
+
+- throw everything against the app
+- see what sticks
+- absolutely works:
+  - can find all sorts of stuff
+- is that stuff useful?
+  - client wants you to test that web application, you are hunting for SSH vulns
+  - general "low hanging fruit"
+- you can "find" nothing with the kitchen sink
+  - no *known* vulnerabilities
+  - and yet: application has slightly-more-than-basic SQLi on the login page
+
+---
+
+# tactics: a guide
+
+- read NIST 800-115: https://csrc.nist.gov/pubs/sp/800/115/final
+- observe:
+  - what is the app doing?
+  - what controls are in place? (do I log in? do I have a session?)
+  - what does the app _do_
+    - often times **this is the vulnerability**
+- orient:
+  - where does the app/system do those things?
+- decide:
+  - select what tools and tactics to bring to bear
+- act:
+  - break into the system
+
+![NIST 800-115: four stage penetration testing model](img/tactics.png)
+    </textarea>
+    <script>
+      var slideshow = remark.create({ highlightLanguage: 'javascript'});
+    </script>
+  </body>
+</html>
