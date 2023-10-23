@@ -1,14 +1,13 @@
-# Sister Loji's Modeling School for Wayward InfoSec Youth
+# 'Tis evening on the moorland
 
-There are four modeling disciplines that are important in infosec, in decreasing order of occurrence:
-
-- risk
-- threat
-- maturity
-- (semi-)formal/correctness
-
-This talk focuses on their direct application into your infosec program
+This talk focuses on how to mature as a pentester
 
 # Building
 
-Use the `ninja` or `samu` build system (I use Sqmurai) to generate an HTML file from the `presentation.md` file
+Use the `ninja` or `samu` build system (I use Sqmurai) to generate an HTML file from the `presentation.md` file:
+
+```
+samu img/airgrap.png
+samu img/bridge.png
+samu presentation.html
+```
