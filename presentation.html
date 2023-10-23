@@ -75,8 +75,7 @@ _23OCT2023_
 1. my career arc
 1. tools
 1. tactics
-1. techniques
-1. procedures
+1. techniques & procedures
 1. Q&A
 
 ---
@@ -125,6 +124,7 @@ against systems you don't own or don't have permission to test**
 - threat intelligence: taking raw data and turning it into potential threats against the org as actionable data (intelligence)
 - threat hunting: forming a hypothesis and testing out that hypothesis against logs & other data sources
 - threat research: manually developing new threats (aka pentesting/red teaming/...)
+- SUT: system under test, basically, our target
 
 ---
 
@@ -222,6 +222,49 @@ bascially:
   - break into the system
 
 ![NIST 800-115: four stage penetration testing model](img/tactics.png)
+
+---
+
+# techniques & procedures
+
+- we've analyzed what the SUT we see _does_ ... but what do we **do** with _that_ information?
+- breakdown common patterns:
+  - User Controlled Data -> Injection -> XSS/SQLi/OGNL/SMTPi/LDAPi
+  - Client Applications -> Confused Deputy -> Clickjacking/CSRF
+- breakdown common themes: 
+  - User Roles -> Privilege Escalation
+  - Application Routes -> Missing Access Controls
+- compose our operations around these:
+  1. Discover a portion of our SUT & Gain Access to that
+  1. Break that (escalate privilege, injection, &c)
+  1. Browse what we now have access to adding new things back to discover
+  1. Potentially gain a foothold on new systems
+  1. Loop
+
+![NIST 800-115: Attack Phase Loopback](img/tech-proc.png)
+
+---
+
+# review
+
+- think about what the SUT does first 
+- use tooling to accelerate thought
+- live off the land as much as possible, live simply & richly
+  - this goes for life too
+- organize our tooling around common themes & patterns that we see 
+- reuse as much as possible for future reviews
+
+## recommended reading
+
+- NIST 800-12: An Introduction to Information Security
+- NIST 800-115: Technical Guide to Information Security Testing and Assessment
+- NIST 800-154: Guide to Data-Centric System Threat Modeling
+
+---
+
+# thank you!
+
+- Questions?
     </textarea>
     <script>
       var slideshow = remark.create({ highlightLanguage: 'javascript'});
